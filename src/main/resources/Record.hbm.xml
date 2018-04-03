@@ -1,0 +1,24 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="database.entity.Record" table="jmrh" >
+
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="url" column="url"/>
+		<property name="title" column="title" type="text" />
+		<property name="content" column="content" type="text" />
+		<property name="date" column="date" type="date"/>
+		<property name="source" column="source"/>
+		<property name="contentType" column="contentType"/>
+		<property name="sourceType" column="sourceType"/>
+		<property name="keyword" column="keyword"/>
+		<property name="summary" column="summary"/>
+		<property name="other" column="other"/>
+
+	</class>
+   
+</hibernate-mapping> 

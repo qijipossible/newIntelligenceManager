@@ -1,0 +1,13 @@
+url, title, content, date, source, contentType, sourceType, keyword, summary, other
+"url" ,"title" ,"content" ,"date" ,"source" ,"contentType" ,"sourceType" ,"keyword" ,"summary" ,"other"
+
+ISSUE LIST
+    Spider MODULE
+        Duplicate remove
+        Inspector: need improvement
+        SmartContent: not good
+    Database MODULE
+        batch find: needed
+    Business MODULE
+        contentType
+    UI MODULE
