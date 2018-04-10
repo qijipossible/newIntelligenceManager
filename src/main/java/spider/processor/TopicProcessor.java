@@ -54,7 +54,7 @@ public class TopicProcessor implements PageProcessor {
 		page.putField("title", title);
 
 		String content = html.smartContent().get(); //XXX 主要内容提取
-		if(content == null || !inspector.isPageQualified(title, content)){
+		if(content == null || content.equals("") || !inspector.isPageQualified(title, content)){
 			System.err.println("not qualified, page skipped.\n");
 			page.setSkip(true);
 			return;

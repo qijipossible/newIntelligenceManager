@@ -37,22 +37,29 @@ public class HibernateUtil {
     private static Session getSession(){
         return sessionfactory.openSession();
     }
+    public static void close(){
+        getSession().close();
+        sessionfactory.close();
+    }
     
 // 以下为操作方法
-    public static Iterator<Record> searchAll(){
+    public static Iterator<Record> getAll(){
         Session session = HibernateUtil.getSession();
         Iterator<Record> records = session.createQuery("from Record a order by a.id asc").iterate();
-        session.close();
         return records;
     }
 
-    public static void updateAll(){
+    public static void parseAll(){
         Session session = HibernateUtil.getSession();
         Transaction tx = session.beginTransaction();
         Iterator records = session.createQuery("from Record a order by a.id asc").iterate();
         while(records.hasNext()) {
             Record record = (Record) records.next();
-            session.update(Parse.ParseRecord(record));
+            if(Parse.ParseRecord(record)){
+                session.update(record);
+            }else {
+                session.delete(record);
+            }
         }
         tx.commit();
         session.close();
@@ -81,7 +88,7 @@ public class HibernateUtil {
     //修改  
     public static void update(Object obj){
         Session session = null;
-        Transaction tx = null;
+        Transaction tx;
         try {
             session = HibernateUtil.getSession();
             tx = session.beginTransaction();

@@ -122,7 +122,7 @@ public class Record {
     }
 
     public String toString() {
-        return "[record:" + id + "]";
+        return "[record " + id + ":" + title + "]";
     }
 
     /*

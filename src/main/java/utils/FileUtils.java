@@ -15,8 +15,9 @@ public class FileUtils {
 		List<String> lines = new ArrayList<String>();
 		try{
 			BufferedReader reader = new BufferedReader(new FileReader(file)); 
-			while((line = reader.readLine()) != null && !line.equals("")){
-				lines.add(line);
+			while((line = reader.readLine()) != null){
+				if(!line.equals(""))
+				    lines.add(line);
 			}
 			reader.close();
 		} catch(IOException e){
