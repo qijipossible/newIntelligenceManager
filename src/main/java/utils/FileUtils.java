@@ -9,8 +9,8 @@ import java.util.List;
 
 public class FileUtils {
 
-	public static List<String> readSiteList(String fileName){
-		File file  = new File(fileName);
+	public static List<String> readSiteList(String filePath){
+		File file  = new File(filePath);
 		String line;
 		List<String> lines = new ArrayList<String>();
 		try{

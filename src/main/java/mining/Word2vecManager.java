@@ -2,6 +2,7 @@ package mining;
 
 import mining.word2vec.DocVectorModel;
 import mining.word2vec.WordVectorModel;
+import utils.Property;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class Word2vecManager {
         return instance;
     }
 
-    private static final String WORD2VEC_MODEL_PATH = "./resources/data/word2vec/hanlp-wiki-vec-zh.txt";
+    private static final String WORD2VEC_MODEL_PATH = Property.WORD2VEC_MODEL_PATH;
     private WordVectorModel wordModel;
     private DocVectorModel docModel;
 

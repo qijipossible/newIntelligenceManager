@@ -1,6 +1,7 @@
 package targetsites;
 
 import utils.FileUtils;
+import utils.Property;
 import utils.UrlUtils;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class SiteManager {
     private List<String> siteStringList;
     private List<Site> siteList = new ArrayList<Site>();
     private SiteManager() {
-        siteStringList = FileUtils.readSiteList(".//resources//sitelist.txt");
+        siteStringList = FileUtils.readSiteList(Property.SITELIST_FILE_PATH);
         // TODO 站点列表预处理，去重等
 
         for(String siteString: siteStringList){
