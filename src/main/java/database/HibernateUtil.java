@@ -22,7 +22,7 @@ public class HibernateUtil {
         // 以下部分用来初始化数据库，将数据库字符集改为UTF-8，否则将不能存储中文
         // XXX 能否将以下初始化部分只在第一次运行
         Session session = sessionfactory.openSession();
-        Transaction tx = session.beginTransaction();;
+        Transaction tx = session.beginTransaction();
         String columns[] = new String[] {"url" ,"title" ,"content" ,"date" ,"source" ,"contentType" ,"sourceType" ,"keyword" ,"summary" ,"other"};
         Query query;
         for(String column : columns){
@@ -37,6 +37,9 @@ public class HibernateUtil {
     private static Session getSession(){
         return sessionfactory.openSession();
     }
+    public static void closeSession(){
+        getSession().close();
+    }
     public static void close(){
         getSession().close();
         sessionfactory.close();
@@ -45,8 +48,7 @@ public class HibernateUtil {
 // 以下为操作方法
     public static Iterator<Record> getAll(){
         Session session = HibernateUtil.getSession();
-        Iterator<Record> records = session.createQuery("from Record a order by a.id asc").iterate();
-        return records;
+        return (Iterator<Record>) session.createQuery("from Record a order by a.id asc").iterate();
     }
 
     public static void parseAll(){
@@ -103,7 +105,7 @@ public class HibernateUtil {
     //删除  
     public static void delete(Object obj){
         Session session = null;
-        Transaction tx = null;
+        Transaction tx;
         try {
             session = HibernateUtil.getSession();
             tx = session.beginTransaction();
@@ -131,5 +133,12 @@ public class HibernateUtil {
                 session.close();
             }
         }
+    }
+
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        close();
     }
 }

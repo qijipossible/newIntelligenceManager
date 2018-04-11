@@ -3,13 +3,13 @@ url, title, content, date, source, contentType, sourceType, keyword, summary, ot
 
 Structure
     Spider MODULE
-        Inspector: xxx
-        SmartContent: xxx
+        Inspector
+        SmartContent
     Database MODULE
         batch find: todo
     Business MODULE
         word2vec
-        classification: todo
+        classification
         summarization
         similarity
         information extraction: todo
