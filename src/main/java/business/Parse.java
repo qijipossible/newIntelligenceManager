@@ -42,7 +42,7 @@ public class Parse {
         }
         List<Map.Entry<Integer, Float>> nearest = docModel.nearest(vector, 1);
         if(!nearest.isEmpty()){
-            if(1.0 - nearest.get(0).getValue() < 0.000001){
+            if(1.0 - nearest.get(0).getValue() < 0.0000001){
                 return false;
             }
         }

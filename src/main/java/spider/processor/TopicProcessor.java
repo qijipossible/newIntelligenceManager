@@ -44,17 +44,17 @@ public class TopicProcessor implements PageProcessor {
         System.out.print("page get: " + url + "\n");
         page.putField("url", url);
 
-		String title = Jsoup.parse(html.$("title").toString()).text();
+		String title = Jsoup.parse(html.$("title").toString()).text().trim();
 		System.out.print("title: " + title + "\n");
-		if(title == null){
+		if(title.equals("")){
 			System.err.println("title is null, page skipped.\n");
 			page.setSkip(true);
 			return;
 		}
 		page.putField("title", title);
 
-		String content = html.smartContent().get(); //XXX 主要内容提取
-		if(content == null || content.equals("") || !inspector.isPageQualified(title, content)){
+		String content = html.smartContent().get().trim(); //XXX 主要内容提取
+		if(content.equals("") || !inspector.isPageQualified(title, content)){
 			System.err.println("not qualified, page skipped.\n");
 			page.setSkip(true);
 			return;

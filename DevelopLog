@@ -1,13 +1,16 @@
 url, title, content, date, source, contentType, sourceType, keyword, summary, other
 "url" ,"title" ,"content" ,"date" ,"source" ,"contentType" ,"sourceType" ,"keyword" ,"summary" ,"other"
 
-ISSUE LIST
+Structure
     Spider MODULE
-        Duplicate remove
-        Inspector: need improvement
-        SmartContent: not good
+        Inspector: xxx
+        SmartContent: xxx
     Database MODULE
-        batch find: needed
+        batch find: todo
     Business MODULE
-        contentType
+        word2vec
+        classification: todo
+        summarization
+        similarity
+        information extraction: todo
     UI MODULE
