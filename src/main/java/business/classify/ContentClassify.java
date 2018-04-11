@@ -1,17 +1,18 @@
-package business;
+package business.classify;
 
 import com.hankcs.hanlp.classification.classifiers.IClassifier;
 import com.hankcs.hanlp.classification.classifiers.NaiveBayesClassifier;
 import com.hankcs.hanlp.classification.models.NaiveBayesModel;
 import com.hankcs.hanlp.corpus.io.IOUtil;
+import utils.Property;
 
 import java.io.File;
 import java.io.IOException;
 
 public class ContentClassify {
 
-    public static final String CORPUS_FOLDER = ".//resources//classifier";
-    public static final String MODEL_PATH = ".//resources//classifier//classification-model.ser";
+    private static final String CORPUS_FOLDER = Property.CLASSIFIER_PATH;
+    private static final String MODEL_PATH = Property.MODEL_FILE_PATH;
 
     static void predict(IClassifier classifier, String text) {
         System.out.printf(classifier.predict(text).toString());
