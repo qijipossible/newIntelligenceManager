@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import business.Parse;
 import org.jsoup.Jsoup;
 
 import spider.Configure;
@@ -42,23 +43,23 @@ public class TopicProcessor implements PageProcessor {
 		// 解析元素
 		String url = page.getUrl().toString();
         System.out.print("page get: " + url + "\n");
-        page.putField("url", url);
-
 		String title = Jsoup.parse(html.$("title").toString()).text().trim();
 		System.out.print("title: " + title + "\n");
-		if(title.equals("")){
+		if(Parse.isItInvalid(title)){ // 若标题无效则不必耗时去解析内容
 			System.err.println("title is null, page skipped.\n");
 			page.setSkip(true);
 			return;
 		}
-		page.putField("title", title);
-
 		String content = html.smartContent().get().trim(); //XXX 主要内容提取
-		if(content.equals("") || !inspector.isPageQualified(title, content)){
+
+		// 判定是否有效，是否保留
+		if(Parse.isAnyInvalid(url, title, content) || !inspector.isPageQualified(title, content)){
 			System.err.println("not qualified, page skipped.\n");
 			page.setSkip(true);
 			return;
 		}
+		page.putField("url", url);
+		page.putField("title", title);
 		page.putField("content", content);
 
         String datetext;
