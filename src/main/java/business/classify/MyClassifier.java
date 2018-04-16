@@ -3,12 +3,14 @@ package business.classify;
 import com.hankcs.hanlp.classification.classifiers.AbstractClassifier;
 import com.hankcs.hanlp.classification.corpus.Document;
 import com.hankcs.hanlp.classification.corpus.IDataSet;
+import com.hankcs.hanlp.classification.corpus.MemoryDataSet;
 import com.hankcs.hanlp.classification.features.BaseFeatureData;
 import com.hankcs.hanlp.classification.models.AbstractModel;
 import com.hankcs.hanlp.classification.models.NaiveBayesModel;
 import com.hankcs.hanlp.classification.utilities.MathUtility;
 import com.hankcs.hanlp.collection.trie.bintrie.BinTrie;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -33,6 +35,12 @@ public class MyClassifier extends AbstractClassifier {
     public AbstractModel getModel()
     {
         return model;
+    }
+
+    public void train(String folderPath) throws IOException{
+        IDataSet dataSet = new MemoryDataSet();
+        dataSet.load(folderPath, "UTF-8");
+        train(dataSet);
     }
 
     public void train(IDataSet dataSet)
@@ -158,6 +166,12 @@ public class MyClassifier extends AbstractClassifier {
     {
         //FeatureStats对象包含文档中所有特征及其统计信息
         BaseFeatureData featureData = new BaseFeatureData(dataSet); //执行统计
+        featureData.wordIdTrie = new BinTrie<Integer>();
+        String[] wordIdArray = dataSet.getLexicon().getWordIdArray();
+        int p = 0;
+        for(String wordId: wordIdArray){
+            featureData.wordIdTrie.put(wordId,p++);
+        }
 
         return featureData;
     }

@@ -6,8 +6,7 @@ import java.io.IOException;
 public class ContentClassifyTest {
 
     public static void main(String[] args) throws IOException {
-        IClassifier classifier = new MyClassifier(ContentClassify.trainOrLoadModel());
-        ContentClassify.predict(classifier, "　　想找路时，掏出手机就可进入三维导航模式；出行时，再也不用过金属安检门，一个小仪器就能完成扫描……或许5年以后，普通四川市民的生活，都会随着一个个军民融合成果的落地，发生翻天覆地的变化。\n" +
+        ContentClassify.predict("想找路时，掏出手机就可进入三维导航模式；出行时，再也不用过金属安检门，一个小仪器就能完成扫描……或许5年以后，普通四川市民的生活，都会随着一个个军民融合成果的落地，发生翻天覆地的变化。\n" +
                 "　　7月13日下午，四川省政府新闻办举行“四川省系统推进全面创新改革试验”第二场发布会，省政府副秘书长罗治平、省经信委主任陈新有、省国防科工办主任许州、省发改委副主任雷开平、省科技厅副厅长田云辉共同回答了记者关心的问题。\n" +
                 "　　会上透露，四川拟用5年时间，推动军民融合主营业务收入突破4000亿元，培育10家100亿以上、20家50亿以上的军民融合大企业大集团，初步建成具有世界先进水平的国防军工战略基地、军地优势资源共享转化示范区、军民两用技术协同创新先导区、军民融合高端产业发展集聚区。\n" +
                 "　　设立100亿基金，58家单位组建产业联盟\n" +
