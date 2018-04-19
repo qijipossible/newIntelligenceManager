@@ -23,6 +23,10 @@ public class SiteManager {
     private List<String> siteStringList;
     private List<Site> siteList = new ArrayList<Site>();
     private SiteManager() {
+        reload();
+    }
+
+    public void reload(){
         siteStringList = FileUtils.readSiteList(Property.SITELIST_FILE_PATH);
         // TODO 站点列表预处理，去重等
 
@@ -35,6 +39,14 @@ public class SiteManager {
 
     public List<Site> getSiteList() {
         return siteList;
+    }
+
+    public String[] getSiteUrlArray(){
+        String[] siteUrlArray = new String[siteList.size()];
+        for (int i = 0; i < siteList.size(); i++) {
+            siteUrlArray[i] = siteList.get(i).getUrl();
+        }
+        return siteUrlArray;
     }
 
     public String domain2name(String domain){

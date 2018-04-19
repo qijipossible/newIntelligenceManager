@@ -34,13 +34,13 @@ public class HibernateUtil {
         session.close();
     }
 
-    private static Session getSession(){
+    static Session getSession(){
         return sessionfactory.openSession();
     }
-    public static void closeSession(){
+    static void closeSession(){
         getSession().close();
     }
-    public static void close(){
+    static void close(){
         getSession().close();
         sessionfactory.close();
     }
@@ -49,22 +49,6 @@ public class HibernateUtil {
     public static Iterator<Record> getAll(){
         Session session = HibernateUtil.getSession();
         return (Iterator<Record>) session.createQuery("from Record a order by a.id asc").iterate();
-    }
-
-    public static void parseAll(){
-        Session session = HibernateUtil.getSession();
-        Transaction tx = session.beginTransaction();
-        Iterator records = session.createQuery("from Record a order by a.id asc").iterate();
-        while(records.hasNext()) {
-            Record record = (Record) records.next();
-            if(Parse.ParseRecord(record)){
-                session.update(record);
-            }else {
-                session.delete(record);
-            }
-        }
-        tx.commit();
-        session.close();
     }
 
     //添加  
