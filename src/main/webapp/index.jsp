@@ -86,7 +86,7 @@ pre {
 				<div class="pageheader">
 					<ul class="hornav" style="margin-top: 0; padding-top: 0;">
 						<li class="current"><a href="#t_1">舆情报告</a></li>
-						<li><a href="#t_2" id="tab2">全体数据</a></a></li>
+						<li><a href="#t_2" id="tab2">全体数据</a></li>
 					</ul>
 				</div>
 				<div id="t_1" class="subcontent"
