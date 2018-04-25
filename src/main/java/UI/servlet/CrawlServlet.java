@@ -1,6 +1,9 @@
 package UI.servlet;
 
+import spider.SpiderManager;
+
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,15 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 public class CrawlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	DataService dataService = DataService.getInstance();
+	private SpiderManager spiderManager = SpiderManager.getInstance();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		CrawlingState crawlingState = dataService.getCrawlingState();
-		int scanned = crawlingState.getScanned();
-		int downloaded = crawlingState.getDowloaded();
-		int left =crawlingState.getLeft();
-		response.getWriter().write("已爬取了"+scanned+"个网页，下载了"+downloaded+"个，还剩"+left+"个.");
+		Map<String, Integer> countMap = spiderManager.getPageCountMap();
+		int downloaded = countMap.get("success");
+		int left = countMap.get("left");
+		response.getWriter().write("已下载了"+downloaded+"个，还剩"+left+"个.");
 		
 	}
 
