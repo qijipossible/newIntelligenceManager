@@ -1,6 +1,8 @@
 package utils;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Properties;
 
 public class Property {
@@ -10,7 +12,12 @@ public class Property {
         Properties p = new Properties();
         try {
             p.load(Property.class.getResourceAsStream("/config.properties"));
-            RESOURCE_ROOT = p.getProperty("ResourceRoot");
+            RESOURCE_ROOT = Property.class.getResource("/").getPath() + p.getProperty("ResourceRoot");
+            Properties properties = new Properties();
+            properties.put("root",RESOURCE_ROOT);
+            FileOutputStream fos = new FileOutputStream(Property.class.getResource("/hanlp.properties").getPath());
+            properties.store(fos, null);
+            fos.close();
         } catch (IOException ignored) {
         }
         if(RESOURCE_ROOT == null || "".equals(RESOURCE_ROOT)) RESOURCE_ROOT = "./resources/";
