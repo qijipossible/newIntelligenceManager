@@ -17,7 +17,7 @@
 		<property name="sourceType" column="sourceType"/>
 		<property name="keyword" column="keyword"/>
 		<property name="summary" column="summary"/>
-		<property name="other" column="other"/>
+		<property name="other" column="other" type="text" />
 
 	</class>
    
