@@ -4,9 +4,9 @@ import database.HibernateUtil;
 
 public class ParseTest {
     private ParseTest() {
-        HibernateUtil.parseAll();
+//        HibernateUtil.parseAll();
 
-        HibernateUtil.close();
+//        HibernateUtil.close();
     }
 
     public static void main(String[] args) {

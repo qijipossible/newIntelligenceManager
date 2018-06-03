@@ -18,7 +18,7 @@ public class Word2vecTest {
             Record cur = records.next();
             docModel.addDocument(cur.getId(), cur.getContent());
         }
-        HibernateUtil.close();
+//        HibernateUtil.close();
         System.out.print(docModel.nearest(4990));
     }
 }
