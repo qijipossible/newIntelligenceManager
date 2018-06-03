@@ -21,17 +21,17 @@ public class HibernateUtil {
 
         // 以下部分用来初始化数据库，将数据库字符集改为UTF-8，否则将不能存储中文
         // XXX 能否将以下初始化部分只在第一次运行
-        Session session = sessionfactory.openSession();
-        Transaction tx = session.beginTransaction();
-        String columns[] = new String[] {"url" ,"title" ,"content" ,"date" ,"source" ,"contentType" ,"sourceType" ,"keyword" ,"summary" ,"other"};
-        Query query;
-        for(String column : columns){
-            String s = "ALTER TABLE `JMRH` CHANGE `"+column+"` `"+column+"` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;";
-            query = session.createSQLQuery(s);
-            query.executeUpdate();
-        }
-        tx.commit();
-        session.close();
+//        Session session = sessionfactory.openSession();
+//        Transaction tx = session.beginTransaction();
+//        String columns[] = new String[] {"url" ,"title" ,"content" ,"date" ,"source" ,"contentType" ,"sourceType" ,"keyword" ,"summary" ,"other"};
+//        Query query;
+//        for(String column : columns){
+//            String s = "ALTER TABLE `JMRH` CHANGE `"+column+"` `"+column+"` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;";
+//            query = session.createSQLQuery(s);
+//            query.executeUpdate();
+//        }
+//        tx.commit();
+//        session.close();
     }
 
     static Session getSession(){
