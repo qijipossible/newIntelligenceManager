@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.itcast.servlet.BaseServlet;
 import org.jsoup.Connection;
-//import service.ControlService;
-//import service.DataService;
+import spider.SpiderManager;
 
 
 
@@ -21,7 +20,8 @@ import org.jsoup.Connection;
 public class SearchServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
-//	private ControlService controlService = ControlService.getInstance();
+	private SpiderManager spiderManager = SpiderManager.getInstance();
+
 	public String startSearch(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -29,12 +29,16 @@ public class SearchServlet extends BaseServlet {
 		String key = request.getParameter("key");
 		System.out.println(key);
 
+		spiderManager.start();
+
 		request.getSession().setAttribute("isCrawling", 1);
 
 		return "index.jsp";
 	}
 	public String stopSearch(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {		
+			throws ServletException, IOException {
+
+	    spiderManager.stop();
 
 		request.getSession().setAttribute("isCrawling", 0);
 		System.out.println("stopcrawling");
