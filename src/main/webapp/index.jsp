@@ -9,14 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>舆论监测系统</title>
     <link rel="stylesheet" href="css/style.default.css" type="text/css"/>
-    <script type="text/javascript" src="./js/plugins/jquery-1.7.min.js"></script>
-    <script type="text/javascript"
-            src="./js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="./js/plugins/jquery.cookie.js"></script>
     <script type="text/javascript"
             src="./js/plugins/tinymce/jquery.tinymce.js"></script>
     <script type="text/javascript" src="./js/custom/general.js"></script>
     <script type="text/javascript" src="./js/custom/editor.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+
 
     <!--[if IE 9]>
     <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
@@ -40,6 +42,7 @@
     </style>
 </head>
 <body>
+
 <div class="bodywrapper">
     <div class="topheader">
         <div class="left">
@@ -68,7 +71,7 @@
                           style="float: left">
                         <input type="hidden" name="method" value="startSearch"/> <input
                             type="text" name="key" class="smallinput"
-                            style="height: 18px; width: 600px" value="${key }">
+                            style="height: 34px; width: 600px" value="${key }">
                         <button class="stdbtn btn_blue">全局搜索</button>
                     </form>
                 </c:otherwise>
@@ -98,35 +101,71 @@
             </div>
             <div id="t_1" class="subcontent"
                  style="display: block; overflow-x: hidden">
+
                 <table class="stdtable">
-                <tr>
-                    <th width="7%">网址</th>
-                    <th width="10%">标题</th>
-                    <th width="15%">内容 </th>
-                    <th width="5%">时间</th>
-                    <th width="3%">来源</th>
-                    <th width="3%">内容类别</th>
-                    <th width ="3%">来源类别</th>
-                    <th width="6%">关键词</th>
-                    <th width="15%">摘要</th>
-                    <th width="2%">其他</th>
-                </tr>
-                <c:forEach items="${recordList}" var="record" varStatus="status1">
-                    <tr>
-                        <td><a href = "${record.url}">${record.url}</a></td>
-                        <td>${record.title}</td>
-                        <td>${record.content}</td>
-                        <td>${record.date}</td>
-                        <td>${record.source}</td>
-                        <td>${record.contentType}</td>
-                        <td>${record.sourceType}</td>
-                        <td>${record.keyword}</td>
-                        <td>${record.summary}</td>
-                        <td>${record.other}</td>
-                    </tr>
+                        <%--<tr>--%>
+                        <%--<th width="7%">标题</th>--%>
+                        <%--<th width="10%">标题</th>--%>
+                        <%--<th width="15%">内容 </th>--%>
+                        <%--<th width="5%">时间</th>--%>
+                        <%--<th width="3%">来源</th>--%>
+                        <%--<th width="3%">内容类别</th>--%>
+                        <%--<th width ="3%">来源类别</th>--%>
+                        <%--<th width="6%">关键词</th>--%>
+                        <%--<th width="15%">摘要</th>--%>
+                        <%--&lt;%&ndash;<th width="2%">其他</th>&ndash;%&gt;--%>
+                        <%--</tr>--%>
+                    <c:forEach items="${recordList}" var="record" varStatus="status">
+                        <tr>
+                            <td>
+                                <a  data-toggle="modal" data-target="#myModal${status.count}" style="font-size: 150%;color:#00F">
+                                        ${record.title}
+                                </a>
+                                <!-- 模态框（Modal） -->
+                                <div class="modal fade" id="myModal${status.count}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    &times;
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                    内容
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                    ${record.content}
+                                            </div>
+
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal -->
+                                </div>
+
+                                <div style="font-size: 70%;color: grey">${record.date}</div>
+                                <a style="font-size: 100%;color: #0f5955" href="${record.url}">${record.url}</a>
+                                <div style="font-size: 120%;">内容类别：${record.contentType}</div>
+                                <div style="font-size: 120%;">来源：${record.source}</div>
+                                <div style="font-size: 120%;">来源类别：${record.sourceType}</div>
+                                <div style="font-size: 120%;">关键词：${record.keyword}</div>
+                                <div style="font-size: 120%;">摘要：${record.summary}</div>
 
 
-                </c:forEach>
+
+                            </td>
+                                <%--<td><a href = "${record.url}">${record.url}</a></td>--%>
+                                <%--<td>${record.title}</td>--%>
+                                <%--<td>${record.content}</td>--%>
+                                <%--<td>${record.date}</td>--%>
+                                <%--<td>${record.source}</td>--%>
+                                <%--<td>${record.contentType}</td>--%>
+                                <%--<td>${record.sourceType}</td>--%>
+                                <%--<td>${record.keyword}</td>--%>
+                                <%--<td>${record.summary}</td>--%>
+                                <%--<td>${record.other}</td>--%>
+                        </tr>
+
+
+                    </c:forEach>
                 </table>
                     <%--<iframe src="<c:url value='report.jsp'/>" name="report"--%>
                     <%--width="100%" height="10000px"></iframe>--%>
@@ -156,6 +195,7 @@
             }
         });
     }
+
     if ("${isCrawling}" == 1) {
         setInterval("getCrawlingState()", "1000");
     }
