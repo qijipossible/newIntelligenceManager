@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
+import UI.UIHelper;
 import spider.SpiderManager;
 
 /**
@@ -18,15 +19,15 @@ import spider.SpiderManager;
 @WebServlet("/CrawlServlet")
 public class CrawlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private SpiderManager spiderManager = SpiderManager.getInstance();
+
+	private UIHelper uiHelper = new UIHelper();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
 
-		Map<String, Integer> countMap = spiderManager.getPageCountMap();
+		Map<String, Integer> countMap = uiHelper.getPageCountMap();
 
 
 		int downloaded = countMap.get("success");

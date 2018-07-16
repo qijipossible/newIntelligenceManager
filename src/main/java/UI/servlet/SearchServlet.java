@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import UI.UIHelper;
 import cn.itcast.servlet.BaseServlet;
 import org.jsoup.Connection;
 import spider.SpiderManager;
@@ -20,7 +21,7 @@ import spider.SpiderManager;
 public class SearchServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
-	private SpiderManager spiderManager = SpiderManager.getInstance();
+	private UIHelper uiHelper = new UIHelper();
 
 	public String startSearch(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,7 +30,7 @@ public class SearchServlet extends BaseServlet {
 		String key = request.getParameter("key");
 		System.out.println(key);
 
-		spiderManager.start();
+		uiHelper.startSpider();
 
 		request.getSession().setAttribute("isCrawling", 1);
 
@@ -38,7 +39,7 @@ public class SearchServlet extends BaseServlet {
 	public String stopSearch(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-	    spiderManager.stop();
+	    uiHelper.stopSpider();
 
 		request.getSession().setAttribute("isCrawling", 0);
 		System.out.println("stopcrawling");
