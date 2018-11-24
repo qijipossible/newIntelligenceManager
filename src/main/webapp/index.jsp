@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page isELIgnored="false" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,7 +17,7 @@
     <script type="text/javascript" src="./js/plugins/jquery.cookie.js"></script>
     <script type="text/javascript"
             src="./js/plugins/tinymce/jquery.tinymce.js"></script>
-    <script type="text/javascript" src="./js/custom/general.js"></script>
+    <%--<script type="text/javascript" src="./js/custom/general.js"></script>--%>
     <script type="text/javascript" src="./js/custom/editor.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
 
@@ -28,6 +30,8 @@
     <![endif]-->
     <!--[if lt IE 9]>
     <script src="js/plugins/css3-mediaqueries.js"></script>
+
+
     <![endif]-->
     <style type="text/css">
         .keyword {
@@ -40,6 +44,7 @@
             word-wrap: break-word;
         }
     </style>
+
 </head>
 <body>
 
@@ -101,72 +106,90 @@
             </div>
             <div id="t_1" class="subcontent"
                  style="display: block; overflow-x: hidden">
+                    <%--<div>--%>
+                    <%--我是展示的第一部分--%>
+                    <%--<div id="showdiv" style="display:none;">我是隐藏的那部分</div>--%>
+                    <%--<a href="#" id="ifok">查看更多</a>--%>
+                    <%--</div>--%>
+                <c:forEach items="${clusterList}" var="cluster">
+                    <div style="font-size: 180%;color:#00F">
+                            ${cluster.clusterAbstract}
+                    </div>
+                    <div style="font-size: 100%;color: #0a6aa1;">
+                        关键词：<span style="color: #0c0c0c">${cluster.clusterKeyWord}</span>
+                    </div>
+                    <div class="showDiv">查看更多<span style="font-size: 80%">▼</span>
+                    <table class="stdtable"  style="display:none;" id="${cluster.id}">
+                            <%--<tr>--%>
+                            <%--<th width="7%">标题</th>--%>
+                            <%--<th width="10%">标题</th>--%>
+                            <%--<th width="15%">内容 </th>--%>
+                            <%--<th width="5%">时间</th>--%>
+                            <%--<th width="3%">来源</th>--%>
+                            <%--<th width="3%">内容类别</th>--%>
+                            <%--<th width ="3%">来源类别</th>--%>
+                            <%--<th width="6%">关键词</th>--%>
+                            <%--<th width="15%">摘要</th>--%>
+                            <%--&lt;%&ndash;<th width="2%">其他</th>&ndash;%&gt;--%>
+                            <%--</tr>--%>
+                        <c:forEach items="${cluster.recordList}" var="record" varStatus="status">
+                            <tr>
+                                <td>
+                                    <a data-toggle="modal" data-target="#myModal${status.count}"
+                                       style="font-size: 150%;color:#00F">
+                                            ${record.title}
+                                    </a>
+                                    <!-- 模态框（Modal） -->
+                                    <div class="modal fade" id="myModal${status.count}" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">
+                                                        &times;
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">
+                                                        内容
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                        ${record.content}
+                                                </div>
 
-                <table class="stdtable">
-                        <%--<tr>--%>
-                        <%--<th width="7%">标题</th>--%>
-                        <%--<th width="10%">标题</th>--%>
-                        <%--<th width="15%">内容 </th>--%>
-                        <%--<th width="5%">时间</th>--%>
-                        <%--<th width="3%">来源</th>--%>
-                        <%--<th width="3%">内容类别</th>--%>
-                        <%--<th width ="3%">来源类别</th>--%>
-                        <%--<th width="6%">关键词</th>--%>
-                        <%--<th width="15%">摘要</th>--%>
-                        <%--&lt;%&ndash;<th width="2%">其他</th>&ndash;%&gt;--%>
-                        <%--</tr>--%>
-                    <c:forEach items="${recordList}" var="record" varStatus="status">
-                        <tr>
-                            <td>
-                                <a  data-toggle="modal" data-target="#myModal${status.count}" style="font-size: 150%;color:#00F">
-                                        ${record.title}
-                                </a>
-                                <!-- 模态框（Modal） -->
-                                <div class="modal fade" id="myModal${status.count}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                    &times;
-                                                </button>
-                                                <h4 class="modal-title" id="myModalLabel">
-                                                    内容
-                                                </h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                    ${record.content}
-                                            </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal -->
+                                    </div>
 
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal -->
-                                </div>
-
-                                <div style="font-size: 70%;color: grey">${record.date}</div>
-                                <a style="font-size: 100%;color: #0f5955" href="${record.url}">${record.url}</a>
-                                <div style="font-size: 120%;">内容类别：${record.contentType}</div>
-                                <div style="font-size: 120%;">来源：${record.source}</div>
-                                <div style="font-size: 120%;">来源类别：${record.sourceType}</div>
-                                <div style="font-size: 120%;">关键词：${record.keyword}</div>
-                                <div style="font-size: 120%;">摘要：${record.summary}</div>
+                                    <div style="font-size: 70%;color: grey">${record.date}</div>
+                                    <a style="font-size: 100%;color: #0f5955" href="${record.url}">${record.url}</a>
+                                    <div style="font-size: 120%;">内容类别：${record.contentType}</div>
+                                    <div style="font-size: 120%;">来源：${record.source}</div>
+                                    <div style="font-size: 120%;">来源类别：${record.sourceType}</div>
+                                    <div style="font-size: 120%;">关键词：${record.keyword}</div>
+                                    <div style="font-size: 120%;">摘要：${record.summary}</div>
 
 
+                                </td>
+                                    <%--<td><a href = "${record.url}">${record.url}</a></td>--%>
+                                    <%--<td>${record.title}</td>--%>
+                                    <%--<td>${record.content}</td>--%>
+                                    <%--<td>${record.date}</td>--%>
+                                    <%--<td>${record.source}</td>--%>
+                                    <%--<td>${record.contentType}</td>--%>
+                                    <%--<td>${record.sourceType}</td>--%>
+                                    <%--<td>${record.keyword}</td>--%>
+                                    <%--<td>${record.summary}</td>--%>
+                                    <%--<td>${record.other}</td>--%>
+                            </tr>
 
-                            </td>
-                                <%--<td><a href = "${record.url}">${record.url}</a></td>--%>
-                                <%--<td>${record.title}</td>--%>
-                                <%--<td>${record.content}</td>--%>
-                                <%--<td>${record.date}</td>--%>
-                                <%--<td>${record.source}</td>--%>
-                                <%--<td>${record.contentType}</td>--%>
-                                <%--<td>${record.sourceType}</td>--%>
-                                <%--<td>${record.keyword}</td>--%>
-                                <%--<td>${record.summary}</td>--%>
-                                <%--<td>${record.other}</td>--%>
-                        </tr>
+
+                        </c:forEach>
 
 
-                    </c:forEach>
-                </table>
+                    </table>
+                    </div>
+                </c:forEach>
                     <%--<iframe src="<c:url value='report.jsp'/>" name="report"--%>
                     <%--width="100%" height="10000px"></iframe>--%>
             </div>
@@ -184,8 +207,15 @@
 <script type="text/javascript">
 
 
-    function getCrawlingState() {
+    $(document).ready(function () {
+        $(".showDiv").click(function () {
+            $(this).children().toggle();
+        });
 
+    });
+
+
+    function getCrawlingState() {
         jQuery.ajax({
             url: "CrawlServlet",
             context: document.body,
