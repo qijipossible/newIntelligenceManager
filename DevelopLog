@@ -1,7 +1,8 @@
-url, title, content, date, source, contentType, sourceType, keyword, summary, other
-"url" ,"title" ,"content" ,"date" ,"source" ,"contentType" ,"sourceType" ,"keyword" ,"summary" ,"other"
+url, title, content, date, source, contentType, sourceType, keyword, summary, other, cluster
+"url" ,"title" ,"content" ,"date" ,"source" ,"contentType" ,"sourceType" ,"keyword" ,"summary" ,"other", "cluster"
 
 Structure
+    query keywords system: spider(inspector), business(tf-idf)
     Spider MODULE
         Inspector
         SmartContent
