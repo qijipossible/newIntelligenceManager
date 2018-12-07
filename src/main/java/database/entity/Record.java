@@ -16,6 +16,7 @@ public class Record {
     private String keyword;
     private String summary;
     private String other;
+    private int cluster;
 
     public Record() {
     }
@@ -119,6 +120,14 @@ public class Record {
 
     public void setOther(String other) {
         this.other = other;
+    }
+
+    public int getCluster() {
+        return cluster;
+    }
+
+    public void setCluster(int cluster) {
+        this.cluster = cluster;
     }
 
     public String toString() {

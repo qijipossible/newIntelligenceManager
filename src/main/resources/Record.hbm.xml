@@ -18,6 +18,7 @@
 		<property name="keyword" column="keyword"/>
 		<property name="summary" column="summary"/>
 		<property name="other" column="other" type="text" />
+		<property name="cluster" column="cluster" type="integer" />
 
 	</class>
    
